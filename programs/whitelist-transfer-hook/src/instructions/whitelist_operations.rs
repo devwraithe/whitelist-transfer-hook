@@ -29,7 +29,7 @@ impl<'info> WhitelistOperations<'info> {
     ) -> Result<()> {
         let whitelist_account = &mut self.whitelist;
 
-        // Check account is not whitelisted before add attempt
+        // Check account is not in whitelist before add attempt
         if whitelist_account.in_whitelist {
             return err!(WhitelistOpError::AddressInWhitelist);
         }
@@ -40,7 +40,7 @@ impl<'info> WhitelistOperations<'info> {
             in_whitelist: true,
         });
 
-        msg!("Address {} added to whitelist!", user_address);
+        msg!("User address {} added to whitelist!", user_address);
 
         Ok(())
     }
@@ -48,14 +48,14 @@ impl<'info> WhitelistOperations<'info> {
     pub fn remove_from_whitelist(&mut self, user_address: Pubkey) -> Result<()> {
         let whitelist_account = &mut self.whitelist;
 
-        // Check account is whitelisted before remove attempt
+        // Check account is in whitelist before remove attempt
         if !whitelist_account.in_whitelist {
             return err!(WhitelistOpError::AddressNotInWhitelist);
         }
 
         whitelist_account.in_whitelist = false;
 
-        msg!("Address {} removed to whitelist!", user_address);
+        msg!("User address {} removed from whitelist!", user_address);
 
         Ok(())
     }

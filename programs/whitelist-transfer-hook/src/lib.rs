@@ -31,7 +31,7 @@ pub mod whitelist_transfer_hook {
         ctx.accounts.remove_from_whitelist(user)
     }
 
-    pub fn init_mint(ctx: Context<TokenFactory>) -> Result<()> {
+    pub fn initialize_mint(ctx: Context<TokenFactory>) -> Result<()> {
         ctx.accounts.init_mint(&ctx.bumps)
     }
 

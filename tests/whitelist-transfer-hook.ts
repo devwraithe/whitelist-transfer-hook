@@ -109,7 +109,7 @@ describe("whitelist-transfer-hook", () => {
     console.log("Transaction signature:", tx);
   });
 
-  it("Create Mint Account with Transfer Hook Extension", async () => {
+  it("Create Mint Account with Transfer Hook Extension (in Client)", async () => {
     const extensions = [ExtensionType.TransferHook];
     const mintLen = getMintLen(extensions);
     const lamports =
@@ -159,7 +159,7 @@ describe("whitelist-transfer-hook", () => {
 
   it("Create Mint Account with Transfer Hook Extension (in Program)", async () => {
     const tx = await program.methods
-      .initMint()
+      .initializeMint()
       .accounts({
         extraAccountMetaList: extraAccountMetaListPDA,
         mint: newMint2022.publicKey,

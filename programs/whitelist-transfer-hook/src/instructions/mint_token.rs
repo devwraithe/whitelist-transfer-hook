@@ -42,7 +42,7 @@ pub struct TokenFactory<'info> {
 }
 
 impl<'info> TokenFactory<'info> {
-    pub fn init_mint(&mut self, bumps: &TokenFactoryBumps) -> Result<()> {
+    pub fn init_mint(&mut self, _bumps: &TokenFactoryBumps) -> Result<()> {
         let cpi_accounts = MintTo {
             mint: self.mint.to_account_info(),
             to: self.user_token_account.to_account_info(),
