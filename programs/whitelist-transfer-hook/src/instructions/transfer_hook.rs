@@ -16,7 +16,7 @@ use anchor_spl::{
     }
 };
 
-use crate::state::Whitelist;
+use crate::{errors::WhitelistOpError, state::Whitelist};
 
 #[derive(Accounts)]
 pub struct TransferHook<'info> {
@@ -55,11 +55,11 @@ impl<'info> TransferHook<'info> {
         msg!("Source token owner: {}", self.source_token.owner);
         msg!("Destination token owner: {}", self.destination_token.owner);
 
-        if self.whitelist.address.contains(&self.source_token.owner) {
-            msg!("Transfer allowed: The address is whitelisted");
-        } else {
-            panic!("TransferHook: Address is not whitelisted");
-        }
+        let whitelist_account = &self.whitelist;
+
+        if !whitelist_account.in_whitelist {
+            return err!(WhitelistOpError::AddressNotInWhitelist);
+        }  
 
         Ok(())
     }
